@@ -1,4 +1,4 @@
-package com.ifpb.todolist;
+package com.ifpb.todolist.janelas_exemplo;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

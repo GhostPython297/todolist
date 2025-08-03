@@ -1,4 +1,4 @@
-package com.ifpb.todolist;
+package com.ifpb.todolist.janelas_exemplo;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -3,6 +3,6 @@ module com.ifpb.todolist {
     requires javafx.fxml;
 
 
-    opens com.ifpb.todolist to javafx.fxml;
-    exports com.ifpb.todolist;
+    exports com.ifpb.todolist.janelas_exemplo;
+    opens com.ifpb.todolist.janelas_exemplo to javafx.fxml;
 }
