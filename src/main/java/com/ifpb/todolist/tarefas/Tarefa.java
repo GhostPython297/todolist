@@ -3,20 +3,32 @@ package com.ifpb.todolist.tarefas;
 import java.time.LocalDate;
 
 public class Tarefa {
+    private long id; // ID único da tarefa
     private String titulo;
     private String descricao;
     private boolean concluida;
     private LocalDate dataCriacao;
     private LocalDate dataVencimento;
 
-    public Tarefa(String titulo, String descricao) {
+    public Tarefa(Long id, String titulo, String descricao) {
         // a validação dos parâmetros foram feitas usando setters
         // para garantir que as validações sejam aplicadas
+        setId(id);
         setTitulo(titulo);
         setDescricao(descricao);
         setConcluida(false);
         setDataCriacao(LocalDate.now());
         setDataVencimento(null);
+    }
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("ID deve ser um número positivo.");
+        }
+        this.id = id;
     }
 
     public String getTitulo() {
@@ -66,21 +78,40 @@ public class Tarefa {
         }
     }
 
-    // formatação string para exibição mandar pro CSV
+    // Método para converter para linha CSV
     public String toCSV() {
-        return String.join(",", titulo, descricao, String.valueOf(concluida),
-                           dataCriacao.toString(),
-                           dataVencimento != null ? dataVencimento.toString() : "");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return id + ";" + titulo + ";" + descricao + ";" + concluida + ";"+
+               (dataVencimento != null ? dataVencimento.format(formatter) : "") + ";" +
+               (dataCriacao != null ? dataCriacao.format(formatter) : "");
     }
+    
+    // Método para criar Tarefa a partir de linha CSV
+    public static Tarefa fromCSV(String csvLine) {
+        String[] dados = csvLine.split(";");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    /* retornando o conteúdo da string em lista para ser usado no CSV
-    public static Tarefa fromCSV(String csv) {
-        String[] linha = csv.split(",");
+        LocalDate dataVenc = dados[4].isEmpty() ? null : LocalDate.parse(dados[4], formatter);
+        LocalDate dataCr = dados[5].isEmpty() ? LocalDate.now() : LocalDate.parse(dados[5], formatter);
 
         return new Tarefa(
-                linha[0], // título
-                linha[1]  // descrição
+            Long.parseLong(dados[0]), // id
+            dados[1], // titulo
+            dados[2], // descricao
+            Boolean.parseBoolean(dados[3]), // concluida
+            dataVenc, // dataVencimento
+            dataCr    // dataCriacao
         );
     }
-     */
+
+    // output de Tarefa como String
+    @Override
+    public String toString() {
+        String concluidaIndicador = concluida ? "✅" : "⏳";
+        
+        String dataVencimento = (dataVencimento != null) ? " ⚠️ VENCIDA " : "Sem vencimento";
+
+        return String.format("ID: %d %s %s | %s | %s | Vence: %s",
+                           id, titulo, descricao, concluidaIndicador, dataVencimento, dataCriacao);
+    }
 }
