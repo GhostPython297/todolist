@@ -1,11 +1,13 @@
 package com.ifpb.todolist.tarefas;
 
+import java.util.Scanner;
+
 public class Main {
     // crud para gerenciamento básico de tarefas
     // as funções podem ser extendidas no futuro
     // para incluir funcionalidades como edição, exclusão, etc.
     public static void main(String[] args) {
-        private static TarefasDAO dao = new TarefasDAO();
+        //private static TarefasDAO dao = new TarefasDAO();
         private static Scanner scanner = new Scanner(System.in);
         private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -51,7 +53,7 @@ public class Main {
         System.out.println("\n➕ === ADICIONAR TAREFA ===");
 
         System.out.print("ID: ");
-        Long id = dao.obterProximoId();
+//        Long id = dao.obterProximoId();
         System.out.println("ID da Tarefa: " + id);
 
         System.out.print("Título: ");
@@ -72,11 +74,11 @@ public class Main {
         }
 
         Tarefa tarefa = new Tarefa(id, titulo, descricao, dataVencimento);
-        dao.adicionarTarefa(tarefa);
+//        dao.adicionarTarefa(tarefa);
     }
     private static void listarTarefas() {
         System.out.println("\n📋 === LISTAR TAREFAS ===");
-        List<Tarefa> tarefas = dao.listarTarefas();
+//        List<Tarefa> tarefas = dao.listarTarefas();
         
         if (tarefas.isEmpty()) {
             System.out.println("Nenhuma tarefa encontrada.");
@@ -90,13 +92,14 @@ public class Main {
     private static void excluirTarefa() {
         System.out.println("\n🗑️ === EXCLUIR TAREFA ===");
         System.out.print("Digite o ID da tarefa a ser excluída: ");
+        Scanner scanner;
         Long id = scanner.nextLong();
         scanner.nextLine(); // Limpar o buffer
         
-        if (dao.excluirTarefa(id)) {
-            System.out.println("✅ Tarefa excluída com sucesso!");
-        } else {
-            System.out.println("❌ Tarefa não encontrada ou erro ao excluir.");
-        }
+//        if (dao.excluirTarefa(id)) {
+//            System.out.println("✅ Tarefa excluída com sucesso!");
+//        } else {
+//            System.out.println("❌ Tarefa não encontrada ou erro ao excluir.");
+//        }
     }
 }
