@@ -1,17 +1,30 @@
-package Aplications;
+package applications;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-
 import javafx.scene.Scene;
+
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/TelaLogin.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        primaryStage.setTitle("Aplicativo de tarefas");
+
+        // Configurações da janela
+        primaryStage.setTitle("Aplicativo de Tarefas");
         primaryStage.setScene(scene);
+
+        // Permitir redimensionamento
+        primaryStage.setResizable(true);
+
+        // Definir tamanhos mínimos
+        primaryStage.setMinWidth(500);
+        primaryStage.setMinHeight(400);
+
+        // Centralizar na tela
+        primaryStage.centerOnScreen();
+
         primaryStage.show();
     }
 

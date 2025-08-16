@@ -2,39 +2,68 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TelaCronogramaController">
+<SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaCronogramaController">
     <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+        <!-- PAINEL LATERAL ESQUERDO -->
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #f8f9fa;">
             <children>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="14.0" prefHeight="32.0" prefWidth="121.0" text="APP de tarefas">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="20.0" prefHeight="32.0" prefWidth="146.0" text="APP de Tarefas">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Button alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="45.0" layoutY="54.0" mnemonicParsing="false" onAction="#VoltarParaTelaPrincipal" prefHeight="25.0" prefWidth="87.0" text="Lista">
+
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="45.0" layoutY="70.0" mnemonicParsing="false" onAction="#voltarParaTelaPrincipal" prefHeight="30.0" prefWidth="110.0" text="📋 Lista" style="-fx-background-color: #e3f2fd; -fx-border-color: #2196f3; -fx-border-radius: 5;">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
-                <Button alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="45.0" layoutY="91.0" mnemonicParsing="false" text="Cronograma">
+
+                <Button alignment="CENTER" contentDisplay="CENTER" layoutX="45.0" layoutY="110.0" disable="true" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" text="📅 Cronograma" style="-fx-background-color: #2196f3; -fx-text-fill: white; -fx-border-radius: 5;">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
-            </children></AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+
+                <!-- Legenda -->
+                <Label layoutX="27.0" layoutY="170.0" text="Legenda:" style="-fx-font-weight: bold; -fx-font-size: 12px;" />
+
+                <VBox layoutX="27.0" layoutY="195.0" spacing="8.0">
+                    <children>
+                        <Label text="✅ Concluída" style="-fx-font-size: 11px;" />
+                        <Label text="🔴 Atrasada" style="-fx-font-size: 11px;" />
+                        <Label text="⚠️ Vence hoje" style="-fx-font-size: 11px;" />
+                        <Label text="⏳ Pendente" style="-fx-font-size: 11px;" />
+                    </children>
+                </VBox>
+
+            </children>
+        </AnchorPane>
+
+        <!-- PAINEL PRINCIPAL DO CRONOGRAMA -->
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="600.0">
             <children>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="14.0" text="Visualização em cronograma">
+                <!-- Título -->
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="20.0" prefHeight="25.0" prefWidth="250.0" text="📅 Cronograma de Tarefas">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Button layoutX="47.0" layoutY="44.0" mnemonicParsing="false" text="Button" />
-                <Button layoutX="119.0" layoutY="44.0" mnemonicParsing="false" text="Button" />
-            </children></AnchorPane>
+
+                <!-- Área de Rolagem do Cronograma -->
+                <ScrollPane fx:id="scrollPaneCronograma" fitToWidth="true" layoutX="20.0" layoutY="60.0" prefHeight="520.0" prefWidth="560.0" style="-fx-background-color: #f5f5f5;">
+                    <content>
+                        <VBox fx:id="containerCronograma" prefWidth="540.0" style="-fx-background-color: #f5f5f5;" />
+                    </content>
+                </ScrollPane>
+
+            </children>
+        </AnchorPane>
     </items>
 </SplitPane>

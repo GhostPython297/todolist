@@ -1,4 +1,4 @@
-package Controllers;
+package controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,7 @@ import java.io.IOException;
 public class TelaLoginController {
 
     @FXML
-    public TextField usename;
+    public TextField username;
 
     @FXML
     private PasswordField password;
@@ -25,21 +25,16 @@ public class TelaLoginController {
 
 
     @FXML
-    public void IrParaTelaPrincipal() {
-        String nome = usename.getText();
+    public void irParaTelaPrincipal() throws IOException {
+        String nome = username.getText();
         String senha = password.getText();
 
         if (nome.equals(loggedInUser) && senha.equals(loggedInPassword)) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/telaPrincipal.fxml"));
-                Parent root = loader.load();
-                Stage stage = (Stage) usename.getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Tela Principal");
-            } catch (IOException e) {
-                mensagemLabel.setText("Erro ao carregar a tela.");
-                e.printStackTrace();
-            }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TelaPrincipal.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) username.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Tela Principal");
         } else {
             mensagemLabel.setText("Email ou senha incorretos.");
         }
