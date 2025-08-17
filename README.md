@@ -69,46 +69,55 @@ src/main/resources/view/              # Interfaces FXML
 ## 🎯 Conceitos de POO Aplicados
 
 ### 1. **Encapsulamento**
+
 - Atributos privados com getters/setters
 - Controle de acesso aos dados das classes
 
 ### 2. **Abstração**
+
 - Métodos que escondem complexidade interna
 - Interfaces claras entre componentes
 
 ### 3. **Responsabilidade Única**
+
 - Cada classe tem uma responsabilidade específica
 - Separação clara entre modelo, visualização e controle
 
 ### 4. **Composição**
+
 - Classes trabalham juntas através de composição
 - CSVUtils usado pelos controladores para persistência
 
 ## 🚦 Como Executar
 
 ### Pré-requisitos
+
 - Java JDK 17 ou superior
 - Maven 3.6 ou superior
 
 ### Passos para Execução
 
 1. **Clone ou baixe o projeto**
+
    ```bash
-   git clone [url-do-repositório]
+   git clone https://github.com/GhostPython297/todolist
    cd todolist
    ```
 
-2. **Compile o projeto**
+2. **Compile o projeto (usando Maven)**
+
    ```bash
    mvn clean compile
    ```
 
-3. **Execute a aplicação**
+3. **Execute a aplicação (com JavaFX)**
+
    ```bash
    mvn javafx:run
    ```
 
    **Ou usando os scripts wrapper:**
+
    ```bash
    # Linux/Mac
    ./mvnw javafx:run
@@ -118,6 +127,7 @@ src/main/resources/view/              # Interfaces FXML
    ```
 
 ### Credenciais de Teste
+
 - **Usuário**: Gabriel
 - **Senha**: 123456
 
@@ -133,12 +143,14 @@ O aplicativo utiliza um arquivo CSV (`tarefas.csv`) para armazenar as tarefas:
 ## 🎨 Interface do Usuário
 
 ### Design Principles
+
 - **Responsividade**: Adapta-se a diferentes tamanhos de tela
 - **Usabilidade**: Interface intuitiva com ícones descritivos
 - **Feedback Visual**: Cores e ícones indicam status das tarefas
 - **Consistência**: Padrão visual mantido em todas as telas
 
 ### Paleta de Cores
+
 - **Azul (#2196F3)**: Elementos principais e navegação
 - **Verde (#4caf50)**: Tarefas concluídas e ações de sucesso
 - **Vermelho (#f44336)**: Tarefas atrasadas e alertas
@@ -148,6 +160,7 @@ O aplicativo utiliza um arquivo CSV (`tarefas.csv`) para armazenar as tarefas:
 ## 📝 Exemplos de Uso
 
 ### Adicionando uma Nova Tarefa
+
 1. Na tela principal, clique em "➕ Nova Tarefa"
 2. Preencha o título (obrigatório)
 3. Adicione descrição (opcional)
@@ -156,6 +169,7 @@ O aplicativo utiliza um arquivo CSV (`tarefas.csv`) para armazenar as tarefas:
 6. Clique em "💾 Salvar"
 
 ### Visualizando no Cronograma
+
 1. Clique em "📅 Cronograma" no menu lateral
 2. Veja tarefas organizadas por data
 3. Identifique visualmente:
@@ -167,11 +181,13 @@ O aplicativo utiliza um arquivo CSV (`tarefas.csv`) para armazenar as tarefas:
 ## 🔧 Personalização e Extensão
 
 ### Adicionando Novas Funcionalidades
+
 1. **Novos Campos**: Edite a classe `Tarefa.java` e atualize CSV
 2. **Nova Tela**: Crie controlador, FXML e adicione navegação
 3. **Novos Validadores**: Adicione no service apropriado
 
 ### Modificando Persistência
+
 - Substitua `CSVUtils` por implementação de banco de dados
 - Mantenha interface compatível para não quebrar controladores
 
@@ -203,6 +219,7 @@ Este projeto foi desenvolvido para fins educacionais no IFPB.
 ## 🎓 Autor
 
 Desenvolvido como projeto acadêmico para demonstrar conceitos de:
+
 - Programação Orientada a Objetos
 - Desenvolvimento de Interfaces Gráficas
 - Persistência de Dados
