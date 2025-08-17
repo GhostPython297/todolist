@@ -9,39 +9,88 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="500.0" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaLoginController">
+<!-- 
+    Tela de Login do Aplicativo de Tarefas
+    
+    Componentes principais:
+    - Campo de usuário
+    - Campo de senha
+    - Botão de login
+    - Label para mensagens de feedback
+    
+    Layout: Centralizado com espaçamento adequado
+-->
+<StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" 
+           minHeight="400.0" minWidth="500.0" prefHeight="500.0" prefWidth="700.0" 
+           xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
+           fx:controller="com.ifpb.todolist.controller.TelaLoginController">
     <children>
+        <!-- Container principal centralizado -->
         <VBox alignment="CENTER" maxWidth="400.0" spacing="25.0" StackPane.alignment="CENTER">
             <children>
+                <!-- Título principal -->
                 <Label alignment="CENTER" text="Aplicativo de Tarefas" textAlignment="CENTER" wrapText="true">
                     <font>
                         <Font name="System Bold" size="24.0" />
                     </font>
                 </Label>
 
+                <!-- Subtítulo -->
                 <Label alignment="CENTER" text="Faça seu Login" textAlignment="CENTER" wrapText="true">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
 
-                <Label alignment="CENTER" text="Digite suas credenciais para acessar o aplicativo" textAlignment="CENTER" wrapText="true" />
+                <!-- Descrição -->
+                <Label alignment="CENTER" text="Digite suas credenciais para acessar o aplicativo" 
+                       textAlignment="CENTER" wrapText="true" />
 
+                <!-- Container dos campos de entrada -->
                 <VBox alignment="CENTER" maxWidth="300.0" spacing="15.0">
                     <children>
-                        <TextField fx:id="username" prefHeight="30.0" promptText="Digite seu nome de usuário" />
-                        <PasswordField fx:id="password" prefHeight="30.0" promptText="Digite sua senha" />
-                        <Label fx:id="mensagemLabel" alignment="CENTER" textAlignment="CENTER" wrapText="true" />
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#irParaTelaPrincipal" prefHeight="30.0" text="ENTRAR" />
+                        <!-- Campo de usuário -->
+                        <TextField fx:id="campoUsuario" prefHeight="35.0" 
+                                 promptText="Digite seu nome de usuário" />
+                        
+                        <!-- Campo de senha -->
+                        <PasswordField fx:id="campoSenha" prefHeight="35.0" 
+                                     promptText="Digite sua senha" />
+                        
+                        <!-- Label para mensagens de feedback -->
+                        <Label fx:id="labelMensagem" alignment="CENTER" 
+                               textAlignment="CENTER" wrapText="true" />
+                        
+                        <!-- Botão de login -->
+                        <Button alignment="CENTER" mnemonicParsing="false" 
+                              onAction="#processarLogin" prefHeight="35.0" 
+                              prefWidth="150.0" text="ENTRAR">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                        
+                        <!-- Botão de ajuda (opcional) -->
+                        <Button alignment="CENTER" mnemonicParsing="false" 
+                              onAction="#exibirAjuda" prefHeight="25.0" 
+                              style="-fx-background-color: transparent; -fx-text-fill: #2196F3;" 
+                              text="Precisa de ajuda?" underline="true" />
                     </children>
                 </VBox>
 
-                <Label alignment="CENTER" text="Ao continuar, você concorda com os nossos Termos de Serviço e Política de Privacidade" textAlignment="CENTER" wrapText="true">
+                <!-- Termos de uso -->
+                <Label alignment="CENTER" text="Ao continuar, você concorda com os nossos Termos de Serviço e Política de Privacidade" 
+                       textAlignment="CENTER" wrapText="true">
                     <VBox.margin>
                         <Insets top="20.0" />
                     </VBox.margin>
+                    <font>
+                        <Font size="10.0" />
+                    </font>
                 </Label>
             </children>
+            
+            <!-- Padding do container principal -->
             <padding>
                 <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
             </padding>

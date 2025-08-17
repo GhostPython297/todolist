@@ -4,42 +4,58 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <!-- Informações do projeto -->
   <groupId>com.ifpb</groupId>
   <artifactId>todolist</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>todolist</name>
+  <name>Aplicativo de Tarefas - IFPB</name>
+  <description>Sistema de gerenciamento de tarefas desenvolvido como projeto acadêmico</description>
 
+  <!-- Propriedades do projeto -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<junit.version>5.10.2</junit.version>  </properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <javafx.version>17.0.6</javafx.version>
+    <junit.version>5.10.2</junit.version>
+  </properties>
 
+  <!-- Dependências do projeto -->
   <dependencies>
+    <!-- JavaFX Controls -->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>17.0.6</version>
+      <version>${javafx.version}</version>
     </dependency>
+    
+    <!-- JavaFX FXML -->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
-      <version>17.0.6</version>
+      <version>${javafx.version}</version>
     </dependency>
 
-<dependency>
+    <!-- JUnit 5 para testes (opcional) -->
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+    
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>  </dependencies>
+    </dependency>
+  </dependencies>
 
+  <!-- Configuração de build -->
   <build>
     <plugins>
+      <!-- Plugin do compilador Maven -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -49,25 +65,48 @@
           <target>17</target>
         </configuration>
       </plugin>
+      
+      <!-- Plugin do JavaFX -->
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
         <executions>
           <execution>
-            <!-- Default configuration for running with: mvn clean javafx:run -->
+            <!-- Configuração para execução com: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>com.ifpb.todolist/com.ifpb.todolist.janelas_exemplo.HelloApplication</mainClass>
-              <launcher>app</launcher>
-              <jlinkZipName>app</jlinkZipName>
-              <jlinkImageName>app</jlinkImageName>
+              <mainClass>com.ifpb.todolist.Main</mainClass>
+              <launcher>todolist-app</launcher>
+              <jlinkZipName>todolist-app</jlinkZipName>
+              <jlinkImageName>todolist-app</jlinkImageName>
               <noManPages>true</noManPages>
               <stripDebug>true</stripDebug>
               <noHeaderFiles>true</noHeaderFiles>
             </configuration>
           </execution>
         </executions>
+      </plugin>
+
+      <!-- Plugin para executar testes -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M7</version>
+      </plugin>
+      
+      <!-- Plugin para criar JAR executável -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.2.2</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>com.ifpb.todolist.Main</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
       </plugin>
     </plugins>
   </build>

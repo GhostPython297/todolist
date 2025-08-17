@@ -1,20 +1,34 @@
-package model;
+package com.ifpb.todolist.model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Classe que representa uma tarefa no sistema
+ * Contém todas as informações e comportamentos relacionados a uma tarefa
+ * 
+ * Demonstra conceitos de POO:
+ * - Encapsulamento: atributos privados com getters/setters
+ * - Abstração: métodos que encapsulam lógica complexa
+ * - Responsabilidade única: classe focada apenas em representar uma tarefa
+ */
 public class Tarefa {
+    
+    // Atributos privados (encapsulamento)
     private String titulo;
     private String descricao;
     private boolean concluida;
     private LocalDate dataCriacao;
     private LocalDate dataVencimento;
 
-    // Formatador para exibição de datas
+    // Formatador para exibição de datas no padrão brasileiro
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    // Construtor principal (usado na leitura do CSV)
-    public Tarefa(String titulo, String descricao, boolean concluida, LocalDate dataCriacao, LocalDate dataVencimento) {
+    /**
+     * Construtor completo - usado principalmente na leitura do CSV
+     */
+    public Tarefa(String titulo, String descricao, boolean concluida, 
+                  LocalDate dataCriacao, LocalDate dataVencimento) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.concluida = concluida;
@@ -22,28 +36,62 @@ public class Tarefa {
         this.dataVencimento = dataVencimento;
     }
 
-    // Construtor simplificado (para novas tarefas)
+    /**
+     * Construtor simplificado - usado para criar novas tarefas
+     * Automaticamente define a data de criação como hoje e a tarefa como não concluída
+     */
     public Tarefa(String titulo, String descricao, LocalDate dataVencimento) {
         this(titulo, descricao, false, LocalDate.now(), dataVencimento);
     }
 
-    // Getters e Setters
-    public String getTitulo() { return titulo; }
-    public void setTitulo(String titulo) { this.titulo = titulo; }
+    // === GETTERS E SETTERS (Encapsulamento) ===
+    
+    public String getTitulo() { 
+        return titulo; 
+    }
+    
+    public void setTitulo(String titulo) { 
+        this.titulo = titulo; 
+    }
 
-    public String getDescricao() { return descricao; }
-    public void setDescricao(String descricao) { this.descricao = descricao; }
+    public String getDescricao() { 
+        return descricao; 
+    }
+    
+    public void setDescricao(String descricao) { 
+        this.descricao = descricao; 
+    }
 
-    public boolean isConcluida() { return concluida; }
-    public void setConcluida(boolean concluida) { this.concluida = concluida; }
+    public boolean isConcluida() { 
+        return concluida; 
+    }
+    
+    public void setConcluida(boolean concluida) { 
+        this.concluida = concluida; 
+    }
 
-    public LocalDate getDataCriacao() { return dataCriacao; }
-    public void setDataCriacao(LocalDate dataCriacao) { this.dataCriacao = dataCriacao; }
+    public LocalDate getDataCriacao() { 
+        return dataCriacao; 
+    }
+    
+    public void setDataCriacao(LocalDate dataCriacao) { 
+        this.dataCriacao = dataCriacao; 
+    }
 
-    public LocalDate getDataVencimento() { return dataVencimento; }
-    public void setDataVencimento(LocalDate dataVencimento) { this.dataVencimento = dataVencimento; }
+    public LocalDate getDataVencimento() { 
+        return dataVencimento; 
+    }
+    
+    public void setDataVencimento(LocalDate dataVencimento) { 
+        this.dataVencimento = dataVencimento; 
+    }
 
-    // Verificar se a tarefa está atrasada
+    // === MÉTODOS DE LÓGICA DE NEGÓCIO ===
+
+    /**
+     * Verifica se a tarefa está atrasada
+     * Uma tarefa está atrasada se não foi concluída e a data de vencimento já passou
+     */
     public boolean isAtrasada() {
         if (concluida || dataVencimento == null) {
             return false;
@@ -51,7 +99,10 @@ public class Tarefa {
         return dataVencimento.isBefore(LocalDate.now());
     }
 
-    // Calcular dias restantes
+    /**
+     * Calcula quantos dias restam para o vencimento
+     * Retorna 0 se a tarefa já foi concluída ou não tem data de vencimento
+     */
     public long diasRestantes() {
         if (concluida || dataVencimento == null) {
             return 0;
@@ -59,7 +110,12 @@ public class Tarefa {
         return java.time.temporal.ChronoUnit.DAYS.between(LocalDate.now(), dataVencimento);
     }
 
-    // Converte para CSV
+    // === MÉTODOS PARA PERSISTÊNCIA ===
+
+    /**
+     * Converte a tarefa para formato CSV
+     * Usado para salvar no arquivo
+     */
     public String toCSV() {
         return titulo + ";" +
                 (descricao != null ? descricao : "") + ";" +
@@ -68,10 +124,15 @@ public class Tarefa {
                 dataCriacao.toString();
     }
 
-    // Cria a tarefa a partir do CSV
+    /**
+     * Cria uma tarefa a partir de uma linha CSV
+     * Método estático (factory method) para criar instâncias a partir de dados persistidos
+     */
     public static Tarefa fromCSV(String csv) {
         try {
-            String[] partes = csv.split(";", -1); // -1 para manter campos vazios
+            // Divide a linha CSV em partes (usando -1 para manter campos vazios)
+            String[] partes = csv.split(";", -1);
+            
             if (partes.length < 5) {
                 throw new IllegalArgumentException("Formato CSV inválido: " + csv);
             }
@@ -83,18 +144,24 @@ public class Tarefa {
             LocalDate dataCriacao = LocalDate.parse(partes[4]);
 
             return new Tarefa(titulo, descricao, concluida, dataCriacao, dataVencimento);
+            
         } catch (Exception e) {
             System.err.println("Erro ao converter CSV: " + e.getMessage());
             throw new RuntimeException("Erro na conversão CSV", e);
         }
     }
 
-    // Exibição na ListView
+    // === MÉTODOS PARA EXIBIÇÃO ===
+
+    /**
+     * Define como a tarefa será exibida na ListView
+     * Inclui ícones visuais e informações sobre prazos
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        // Ícone de status
+        // Adiciona ícone baseado no status
         if (concluida) {
             sb.append("✅ ");
         } else if (isAtrasada()) {
@@ -103,10 +170,10 @@ public class Tarefa {
             sb.append("⏳ ");
         }
 
-        // Título
+        // Adiciona o título
         sb.append(titulo);
 
-        // Informações adicionais
+        // Adiciona informações sobre prazo (se não estiver concluída)
         if (dataVencimento != null && !concluida) {
             long dias = diasRestantes();
             if (dias < 0) {
@@ -121,7 +188,9 @@ public class Tarefa {
         return sb.toString();
     }
 
-    // Obter descrição formatada para exibição
+    /**
+     * Retorna a descrição formatada para exibição
+     */
     public String getDescricaoFormatada() {
         if (descricao == null || descricao.trim().isEmpty()) {
             return "Sem descrição disponível";
@@ -129,7 +198,9 @@ public class Tarefa {
         return descricao;
     }
 
-    // Obter data de vencimento formatada
+    /**
+     * Retorna a data de vencimento formatada (dd/MM/yyyy)
+     */
     public String getDataVencimentoFormatada() {
         if (dataVencimento == null) {
             return "Não definida";
@@ -137,12 +208,16 @@ public class Tarefa {
         return dataVencimento.format(FORMATTER);
     }
 
-    // Obter data de criação formatada
+    /**
+     * Retorna a data de criação formatada (dd/MM/yyyy)
+     */
     public String getDataCriacaoFormatada() {
         return dataCriacao.format(FORMATTER);
     }
 
-    // Obter status completo
+    /**
+     * Retorna o status completo da tarefa com ícone
+     */
     public String getStatusCompleto() {
         if (concluida) {
             return "✅ Concluída";

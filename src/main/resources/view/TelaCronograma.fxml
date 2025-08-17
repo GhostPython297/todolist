@@ -4,33 +4,59 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.25" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="800.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaCronogramaController">
+<!--
+    Tela de Cronograma do Aplicativo de Tarefas
+    
+    Estrutura:
+    - Painel lateral esquerdo: Navegação e legenda
+    - Área principal: Cronograma organizado por datas
+    
+    Funcionalidades:
+    - Visualizar tarefas organizadas cronologicamente
+    - Destacar tarefas atrasadas e próximas do vencimento
+    - Marcar tarefas como concluídas diretamente no cronograma
+    - Voltar para a tela principal
+-->
+<SplitPane dividerPositions="0.25" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" 
+           minHeight="500.0" minWidth="800.0" prefHeight="600.0" prefWidth="1000.0" 
+           xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
+           fx:controller="com.ifpb.todolist.controller.TelaCronogramaController">
     <items>
-        <!-- PAINEL LATERAL ESQUERDO -->
-        <VBox alignment="TOP_CENTER" minWidth="180.0" prefWidth="200.0" spacing="20.0">
+        <!-- PAINEL LATERAL ESQUERDO - NAVEGAÇÃO E LEGENDA -->
+        <VBox alignment="TOP_CENTER" minWidth="180.0" prefWidth="200.0" spacing="20.0" 
+              style="-fx-background-color: #f5f5f5;">
             <padding>
                 <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
             </padding>
             <children>
-                <Label alignment="CENTER" text="APP de Tarefas" textAlignment="CENTER" wrapText="true">
+                <!-- Logo/Título do app -->
+                <Label alignment="CENTER" text="📝 APP de Tarefas" textAlignment="CENTER" wrapText="true">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
 
+                <!-- Botões de navegação -->
                 <VBox alignment="CENTER" spacing="10.0">
                     <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#voltarParaTelaPrincipal" prefHeight="30.0" text="📋 Lista">
+                        <!-- Botão Lista -->
+                        <Button alignment="CENTER" mnemonicParsing="false" 
+                               onAction="#voltarParaTelaPrincipal" prefHeight="35.0" prefWidth="150.0" 
+                               text="📋 Lista">
                             <font>
                                 <Font size="12.0" />
                             </font>
                         </Button>
 
-                        <Button alignment="CENTER" disable="true" mnemonicParsing="false" prefHeight="30.0" text="📅 Cronograma">
+                        <!-- Botão Cronograma (atual - desabilitado) -->
+                        <Button alignment="CENTER" disable="true" mnemonicParsing="false" 
+                               prefHeight="35.0" prefWidth="150.0" text="📅 Cronograma" 
+                               style="-fx-background-color: #2196F3; -fx-text-fill: white;">
                             <font>
                                 <Font size="12.0" />
                             </font>
@@ -38,37 +64,89 @@
                     </children>
                 </VBox>
 
-                <!-- Legenda -->
-                <VBox spacing="10.0">
-                    <VBox.margin>
-                        <Insets top="30.0" />
-                    </VBox.margin>
+                <!-- Separador -->
+                <Separator />
+
+                <!-- Legenda de status -->
+                <VBox spacing="12.0">
                     <children>
-                        <Label text="Legenda:">
+                        <Label text="📊 Legenda de Status:">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font>
                         </Label>
 
-                        <VBox spacing="5.0">
+                        <VBox spacing="6.0">
                             <children>
-                                <Label text="✅ Concluída" />
-                                <Label text="🔴 Atrasada" />
-                                <Label text="⚠️ Vence hoje" />
-                                <Label text="⏳ Pendente" />
+                                <Label text="✅ Tarefa Concluída" />
+                                <Label text="🔴 Tarefa Atrasada" />
+                                <Label text="⚠️ Vence Hoje" />
+                                <Label text="⏳ Tarefa Pendente" />
                             </children>
                         </VBox>
                     </children>
                 </VBox>
 
-                <!-- Informações adicionais -->
-                <VBox spacing="5.0">
-                    <VBox.margin>
-                        <Insets top="20.0" />
-                    </VBox.margin>
+                <!-- Separador -->
+                <Separator />
+
+                <!-- Legenda de datas -->
+                <VBox spacing="12.0">
                     <children>
-                        <Label text="💡 Dica:" />
-                        <Label text="As tarefas são organizadas por data de vencimento. Clique no checkbox para marcar como concluída." textAlignment="JUSTIFY" wrapText="true" />
+                        <Label text="📅 Legenda de Datas:">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+
+                        <VBox spacing="6.0">
+                            <children>
+                                <Label text="📅 (HOJE)" style="-fx-text-fill: #2196F3; -fx-font-weight: bold;" />
+                                <Label text="⚠️ (ATRASADA)" style="-fx-text-fill: #f44336; -fx-font-weight: bold;" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+
+                <!-- Separador -->
+                <Separator />
+
+                <!-- Dicas de uso -->
+                <VBox spacing="8.0">
+                    <children>
+                        <Label text="💡 Dicas:">
+                            <font>
+                                <Font name="System Bold" size="11.0" />
+                            </font>
+                        </Label>
+                        
+                        <Label text="• As tarefas são organizadas por data de vencimento" 
+                               textAlignment="JUSTIFY" wrapText="true">
+                            <font>
+                                <Font size="10.0" />
+                            </font>
+                        </Label>
+                        
+                        <Label text="• Clique no ☑️ para marcar como concluída" 
+                               textAlignment="JUSTIFY" wrapText="true">
+                            <font>
+                                <Font size="10.0" />
+                            </font>
+                        </Label>
+                        
+                        <Label text="• Tarefas concluídas aparecem com fundo verde" 
+                               textAlignment="JUSTIFY" wrapText="true">
+                            <font>
+                                <Font size="10.0" />
+                            </font>
+                        </Label>
+                        
+                        <Label text="• Tarefas atrasadas têm fundo vermelho" 
+                               textAlignment="JUSTIFY" wrapText="true">
+                            <font>
+                                <Font size="10.0" />
+                            </font>
+                        </Label>
                     </children>
                 </VBox>
             </children>
@@ -78,14 +156,14 @@
         <VBox minWidth="400.0" spacing="0.0">
             <children>
                 <!-- Cabeçalho -->
-                <VBox alignment="CENTER_LEFT">
+                <VBox alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-width: 0 0 1 0;">
                     <padding>
                         <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
                     </padding>
                     <children>
                         <Label text="📅 Cronograma de Tarefas">
                             <font>
-                                <Font name="System Bold" size="18.0" />
+                                <Font name="System Bold" size="20.0" />
                             </font>
                         </Label>
 
@@ -93,17 +171,32 @@
                             <VBox.margin>
                                 <Insets top="5.0" />
                             </VBox.margin>
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                        
+                        <Label text="As datas são organizadas cronologicamente, com destaques especiais para hoje e datas atrasadas.">
+                            <VBox.margin>
+                                <Insets top="3.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font size="11.0" />
+                            </font>
                         </Label>
                     </children>
                 </VBox>
 
                 <!-- Área de Rolagem do Cronograma -->
-                <ScrollPane fx:id="scrollPaneCronograma" fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
-                    <padding>
-                        <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
-                    </padding>
+                <ScrollPane fx:id="painelRolagemCronograma" fitToWidth="true" hbarPolicy="NEVER" 
+                           VBox.vgrow="ALWAYS" style="-fx-background-color: #fafafa;">
                     <content>
-                        <VBox fx:id="containerCronograma" spacing="15.0" />
+                        <!-- Container onde as seções de datas serão adicionadas dinamicamente -->
+                        <VBox fx:id="containerCronograma" spacing="15.0" style="-fx-background-color: #fafafa;">
+                            <padding>
+                                <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
+                            </padding>
+                        </VBox>
                     </content>
                 </ScrollPane>
             </children>
