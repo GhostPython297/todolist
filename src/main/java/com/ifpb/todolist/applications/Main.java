@@ -11,16 +11,20 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/TelaLogin.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-        // Configurações da janela
+        // Configurações básicas da janela
         primaryStage.setTitle("Aplicativo de Tarefas");
         primaryStage.setScene(scene);
 
         // Permitir redimensionamento
         primaryStage.setResizable(true);
 
-        // Definir tamanhos mínimos
-        primaryStage.setMinWidth(500);
-        primaryStage.setMinHeight(400);
+        // Definir tamanhos mínimos para responsividade
+        primaryStage.setMinWidth(800);
+        primaryStage.setMinHeight(600);
+
+        // Tamanho inicial
+        primaryStage.setWidth(1000);
+        primaryStage.setHeight(650);
 
         // Centralizar na tela
         primaryStage.centerOnScreen();
