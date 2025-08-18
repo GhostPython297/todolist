@@ -116,6 +116,16 @@ src/main/resources/view/              # Interfaces FXML
    mvn javafx:run
    ```
 
+   **Ou usando os scripts wrapper:**
+
+   ```bash
+   # Linux/Mac
+   ./mvnw javafx:run
+   
+   # Windows
+   mvnw.cmd javafx:run
+   ```
+
 ### Credenciais de Teste
 
 - **Usuário**: Gabriel
