@@ -17,7 +17,7 @@ Este é um sistema desktop de gerenciamento de tarefas desenvolvido como projeto
 - **Interface Responsiva**: Adaptável a diferentes tamanhos de tela
 - **Indicadores Visuais**: Status colorido para tarefas (pendente, atrasada, concluída)
 
-### Capturas de tela
+### 🖼️ Capturas de tela
 
 ![](./screenshots/tela_02.png)
 
