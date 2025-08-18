@@ -19,7 +19,23 @@ Este é um sistema desktop de gerenciamento de tarefas desenvolvido como projeto
 
 ### Capturas de tela
 
-_As imagens devem ser adicionadas aqui uma abaixo da outra._
+![](./screenshots/Captura de Tela (2).png)
+
+![](./screenshots/Captura de Tela (3).png)
+
+![](./screenshots/Captura de Tela (4).png)
+
+![](./screenshots/Captura de Tela (5).png)
+
+![](./screenshots/Captura de Tela (6).png)
+
+![](./screenshots/Captura de Tela (7).png)
+
+![](./screenshots/Captura de Tela (8).png)
+
+![](./screenshots/Captura de Tela (9).png)
+
+![](./screenshots/Captura de Tela (10).png)
 
 ### 📋 Funcionalidades Detalhadas
 
